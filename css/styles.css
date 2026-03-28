@@ -55,7 +55,7 @@ body{
 .logo span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 /* Nav links */
-.nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:2.4rem;list-style:none}
 .nav-links a{
   color:var(--text-dim);text-decoration:none;font-size:.875rem;font-weight:500;
   transition:color .2s;
