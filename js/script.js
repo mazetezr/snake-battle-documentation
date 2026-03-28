@@ -9,7 +9,7 @@ const translations = {
   navModes: { ru: 'Режимы', en: 'Modes' },
 
   // HERO
-  heroBadge: { ru: 'Game Design Document v2.3', en: 'Game Design Document v2.3' },
+  heroBadge: { ru: 'Game Design Document', en: 'Game Design Document' },
   heroTitle1: { ru: 'Web3', en: 'Web3' },
   heroTitle2: { ru: 'Snake Battle', en: 'Snake Battle' },
   heroSubtitle: {
