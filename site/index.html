@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 Snake Battle — Whitepaper</title>
+  <meta name="description" content="Web3 Snake Battle — Game Design Document. Multiplayer PvP game with real crypto stakes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="icon">🐍</span>
+      <span>Snake Battle</span>
+    </a>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#concept" data-i18n="navConcept">Концепция</a></li>
+        <li><a href="#gameplay" data-i18n="navGameplay">Геймплей</a></li>
+        <li><a href="#economy" data-i18n="navEconomy">Экономика</a></li>
+        <li><a href="#powers" data-i18n="navPowers">Способности</a></li>
+        <li><a href="#referral" data-i18n="navReferral">Реферальная</a></li>
+        <li><a href="#modes" data-i18n="navModes">Режимы</a></li>
+        <li>
+          <div class="lang-toggle">
+            <button class="active" data-lang="ru" onclick="switchLang('ru')">RU</button>
+            <button data-lang="en" onclick="switchLang('en')">EN</button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ TOC DOTS ============ -->
+<div class="toc">
+  <a href="#concept" title="Concept"></a>
+  <a href="#gameplay" title="Gameplay"></a>
+  <a href="#economy" title="Economy"></a>
+  <a href="#powers" title="Powers"></a>
+  <a href="#progression" title="Progression"></a>
+  <a href="#referral" title="Referral"></a>
+  <a href="#modes" title="Modes"></a>
+  <a href="#security" title="Security"></a>
+  <a href="#monetization" title="Monetization"></a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="heroBadge">Game Design Document v2.3</div>
+    <h1>
+      <span class="highlight" data-i18n="heroTitle1">Web3</span><br>
+      <span data-i18n="heroTitle2">Snake Battle</span>
+    </h1>
+    <p class="subtitle" data-i18n="heroSubtitle">Многопользовательская PvP-игра с реальными крипто-ставками. Управляйте червяком, который содержит реальную криптовалюту. Съедайте других игроков — забирайте их деньги.</p>
+    <div class="hero-buttons">
+      <a href="#concept" class="btn btn-primary" data-i18n="heroBtn1">Читать документ</a>
+      <a href="#economy" class="btn btn-outline" data-i18n="heroBtn2">Экономика</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1. CONCEPT ============ -->
+<div class="divider"></div>
+<section id="concept" class="section fade-up">
+  <span class="section-label" data-i18n="sec1Label">Раздел 1</span>
+  <h2 data-i18n="sec1Title">Концепция игры</h2>
+  <p data-i18n="sec1Desc">Многопользовательская PvP-игра, где игроки управляют червяками, содержащими реальную криптовалюту. Съедая других игроков, вы забираете часть их средств.</p>
+
+  <div class="card-grid cols-3">
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <h3 data-i18n="aud1Title">Крипто-энтузиасты</h3>
+      <p data-i18n="aud1Desc">Активные пользователи криптовалют, ищущие новые способы заработка</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚔️</div>
+      <h3 data-i18n="aud2Title">PvP-геймеры</h3>
+      <p data-i18n="aud2Desc">Любители казуальных соревновательных игр</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3 data-i18n="aud3Title">Play-to-Earn</h3>
+      <p data-i18n="aud3Desc">Игроки, зарабатывающие на играх</p>
+    </div>
+  </div>
+
+  <div class="info-box" style="margin-top:2rem">
+    <strong data-i18n="platLabel">Платформы</strong><br>
+    <span data-i18n="platMVP">MVP: Web-версия (Desktop/Laptop) — только веб на старте</span><br>
+    <span data-i18n="platPost">Пост-MVP: Desktop/Laptop + Mobile (отдельные серверы для мобильных)</span>
+  </div>
+</section>
+
+<!-- ============ 2. GAMEPLAY ============ -->
+<div class="divider"></div>
+<section id="gameplay" class="section fade-up">
+  <span class="section-label" data-i18n="sec2Label">Раздел 2</span>
+  <h2 data-i18n="sec2Title">Core Gameplay механики</h2>
+  <p data-i18n="sec2Desc">Классическая механика Snake с инновационной экономической моделью. Каждое столкновение — это реальная финансовая транзакция.</p>
+
+  <h3 style="color:var(--text-heading);margin-bottom:1rem" data-i18n="movTitle">Базовая механика движения</h3>
+  <ul class="feature-list">
+    <li data-i18n="mov1">Червяк следует за курсором мыши</li>
+    <li data-i18n="mov2">Постоянное движение вперёд</li>
+    <li data-i18n="mov3">Смерть при столкновении головой с телом другого червяка</li>
+    <li data-i18n="mov4">Рост длины и массы при поглощении объектов</li>
+    <li data-i18n="mov5">Ускорение без потери массы и денег (ограничено по времени)</li>
+    <li data-i18n="mov6">Все игроки стартуют с одинаковым весом/размером</li>
+    <li data-i18n="mov7">Защита новичков — 3 секунды неуязвимости при спавне</li>
+  </ul>
+
+  <div class="card-grid cols-2" style="margin-top:2rem">
+    <div class="card">
+      <div class="card-icon">🍽️</div>
+      <h3 data-i18n="eatTitle">Система «Съедания»</h3>
+      <p style="color:var(--accent);font-weight:600;margin-bottom:.5rem" data-i18n="eatWhatLabel">Что можно съесть:</p>
+      <ul class="feature-list">
+        <li data-i18n="eat1">Мёртвых червяков (распадаются на сегменты)</li>
+        <li data-i18n="eat2">Бесплатные пузыри с массой</li>
+        <li data-i18n="eat3">Маленькие пузырьки от турбо (декоративные)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">💀</div>
+      <h3 data-i18n="deathTitle">Механика смерти</h3>
+      <ul class="feature-list">
+        <li data-i18n="death1">При смерти червяк распадается на светящиеся сегменты</li>
+        <li data-i18n="death2">Каждый сегмент содержит часть общей массы</li>
+        <li data-i18n="death3">Сегменты можно съесть — получаете массу и деньги убитого</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box" style="margin-top:2rem">
+    <strong data-i18n="exitTitle">Выход из игры</strong><br>
+    <span data-i18n="exitDesc">Для выхода нужно зажать клавишу «F» на 2,5 секунды. Есть возможность прокачать значение «Exit», уменьшив длительность выхода.</span>
+  </div>
+</section>
+
+<!-- ============ 3. ECONOMY ============ -->
+<div class="divider"></div>
+<section id="economy" class="section fade-up">
+  <span class="section-label" data-i18n="sec3Label">Раздел 3</span>
+  <h2 data-i18n="sec3Title">Монетизация и экономика</h2>
+  <p data-i18n="sec3Desc">Прозрачная экономическая модель с фиксированными процентами и системой лиг для игроков разного уровня.</p>
+
+  <!-- Wallet -->
+  <div class="card" style="margin-bottom:2rem">
+    <div class="card-icon">👛</div>
+    <h3 data-i18n="walletTitle">Система кошельков</h3>
+    <p data-i18n="walletDesc">При регистрации создаётся custodial wallet под управлением платформы с поддержкой разных блокчейнов. Игроки депозитят CRYPTO и могут вывести средства на внешний кошелёк.</p>
+  </div>
+
+  <!-- Leagues table -->
+  <h3 style="color:var(--text-heading);margin-bottom:1rem" data-i18n="leaguesTitle">Система лиг (Entry Fee)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="thLeague">Лига</th>
+          <th data-i18n="thEntry">Входной взнос</th>
+          <th data-i18n="thBoosts">Доступные бусты</th>
+          <th data-i18n="thAudience">Целевая аудитория</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="league-badge rookie" data-i18n="lgRookie">Новичок</span></td>
+          <td>$0.10</td>
+          <td data-i18n="lgRookieBoost">Amplifiers + базовое Ускорение (без прокачки)</td>
+          <td data-i18n="lgRookieAud">Новички, тестирование</td>
+        </tr>
+        <tr>
+          <td><span class="league-badge basic" data-i18n="lgBasic">Базовая</span></td>
+          <td>$1.00</td>
+          <td data-i18n="lgBasicBoost">Ускорение (с прокачкой)</td>
+          <td data-i18n="lgBasicAud">Начинающие игроки</td>
+        </tr>
+        <tr>
+          <td><span class="league-badge amateur" data-i18n="lgAmateur">Аматор</span></td>
+          <td>$5.00</td>
+          <td data-i18n="lgAmateurBoost">Ускорение (с прокачкой) + Нора</td>
+          <td data-i18n="lgAmateurAud">Опытные игроки</td>
+        </tr>
+        <tr>
+          <td><span class="league-badge pro" data-i18n="lgPro">Про</span></td>
+          <td>$10.00</td>
+          <td data-i18n="lgProBoost">Все (+ Неуязвимость)</td>
+          <td data-i18n="lgProAud">Хардкорные игроки</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Death distribution -->
+  <h3 style="color:var(--text-heading);margin:2rem 0 1rem" data-i18n="deathDistTitle">Распределение средств при смерти</h3>
+  <p class="desc" data-i18n="deathDistDesc">Когда игрок умирает с балансом $X:</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="num">87.5%</div>
+      <div class="label" data-i18n="dist1">выпадает в сегментах</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">2%</div>
+      <div class="label" data-i18n="dist2">реф. программа</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">6.5–12.5%</div>
+      <div class="label" data-i18n="dist3">комиссия платформы</div>
+    </div>
+  </div>
+
+  <!-- Safe Exit -->
+  <div class="info-box">
+    <strong data-i18n="safeExitTitle">Safe Exit (безопасный выход)</strong><br>
+    <span data-i18n="safeExitDesc">При безопасном выходе из игры (зажатие «F») применяется точно такое же распределение, как и при смерти. Игрок получает 87,5% от текущего баланса. Платформа получает комиссию с каждого выхода.</span>
+  </div>
+
+  <!-- Commission by referral -->
+  <h3 style="color:var(--text-heading);margin:2rem 0 1rem" data-i18n="commTitle">Комиссия платформы по рефералам</h3>
+  <ul class="feature-list">
+    <li data-i18n="commNoRef">Нет реферера → 12,5% платформе</li>
+    <li data-i18n="commBase">Базовый реферер (2%) → 10,5% платформе</li>
+    <li data-i18n="commAmb">Базовый амбассадор (4%) → 8,5% платформе</li>
+    <li data-i18n="commPrem">Премиум амбассадор (6%) → 6,5% платформе</li>
+  </ul>
+</section>
+
+<!-- ============ 4. POWERS ============ -->
+<div class="divider"></div>
+<section id="powers" class="section fade-up">
+  <span class="section-label" data-i18n="sec4Label">Раздел 4</span>
+  <h2 data-i18n="sec4Title">Powers и Amplifiers</h2>
+  <p data-i18n="sec4Desc">Система усилений и способностей разделена на Amplifiers (собираемые на карте) и Powers (активные способности с ограничениями по лигам).</p>
+
+  <!-- Amplifiers -->
+  <h3 style="color:var(--accent);margin-bottom:1.5rem;font-family:var(--font-heading)" data-i18n="ampTitle">Amplifiers (спавнятся на карте)</h3>
+  <div class="card-grid cols-2">
+    <div class="card">
+      <div class="card-icon">🟢</div>
+      <h3 data-i18n="massOrbTitle">Mass Orbs 🟢</h3>
+      <p data-i18n="massOrbDesc">Появляются случайно по карте. Дают только массу и длину, НЕ дают деньги.</p>
+      <div style="margin-top:1rem">
+        <div class="upgrade-path">
+          <span style="color:var(--text-dim);font-size:.85rem" data-i18n="massOrbLen">Длина: +5 → +8 → +12 → +15 → +20</span>
+        </div>
+        <div class="upgrade-path">
+          <span style="color:var(--text-dim);font-size:.85rem" data-i18n="massOrbWid">Ширина: +0.5 → +0.7 → +1.0 → +1.2 → +1.5</span>
+        </div>
+        <div class="upgrade-path">
+          <span style="color:var(--text-dim);font-size:.85rem" data-i18n="massOrbDur">Время: 15с → 20с → 30с → 45с → 70с</span>
+        </div>
+        <p style="margin-top:.75rem;font-size:.85rem;color:var(--accent)" data-i18n="massOrbCost">Стоимость прокачки: 499 → 899 → 1 799 → 3 599 гемов</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">👁</div>
+      <h3 data-i18n="visionTitle">Vision Boost 👁</h3>
+      <p data-i18n="visionDesc">Появляется случайно. Увеличивает радиус видимости камеры.</p>
+      <div style="margin-top:1rem">
+        <div class="upgrade-path">
+          <span style="color:var(--text-dim);font-size:.85rem" data-i18n="visionRadius">Радиус обзора: +20% → +40% → +60% → +80% → +100%</span>
+        </div>
+        <div class="upgrade-path">
+          <span style="color:var(--text-dim);font-size:.85rem" data-i18n="visionDur">Длительность: 15с → 20с → 25с → 30с → 40с</span>
+        </div>
+        <p style="margin-top:.75rem;font-size:.85rem;color:var(--accent)" data-i18n="visionCost">Стоимость прокачки: 499 → 899 → 1 799 → 3 599 гемов</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Powers -->
+  <h3 style="color:var(--accent);margin:2.5rem 0 1.5rem;font-family:var(--font-heading)" data-i18n="powersTitle">Powers (активные способности)</h3>
+
+  <!-- Turbo -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+      <span style="font-size:1.5rem">⚡</span>
+      <h3 data-i18n="turboTitle">Турбо ⚡</h3>
+    </div>
+    <p data-i18n="turboDesc">Увеличивает скорость движения на 50–100%. Выделяются маленькие точки массы, но сама масса не теряется. Динамическая перезарядка.</p>
+    <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div class="upgrade-path"><span style="color:var(--text-dim);font-size:.85rem" data-i18n="turboDur">Время: 5с → 6с → 7с → 8с → 10с</span></div>
+        <div class="upgrade-path"><span style="color:var(--text-dim);font-size:.85rem" data-i18n="turboRecharge">Перезарядка: 5с → 4.5с → 4с → 3.5с → 3с</span></div>
+      </div>
+    </div>
+    <p style="margin-top:.75rem;font-size:.85rem;color:var(--accent)" data-i18n="turboCost">Стоимость: 1 099 → 2 299 → 4 499 → 8 999 гемов</p>
+    <p style="margin-top:.4rem;font-size:.85rem;color:var(--text-dim)" data-i18n="turboAccess">Доступ: Базовый (без прокачки) — Новичок; С прокачкой — от лиги Базовая</p>
+  </div>
+
+  <!-- Dive -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+      <span style="font-size:1.5rem">🕳</span>
+      <h3 data-i18n="diveTitle">Нора (Dive) 🕳</h3>
+    </div>
+    <p data-i18n="diveDesc">Червяк «закапывается» на текущей позиции. 3 секунды на выбор точки выхода в радиусе X пикселей. Перезарядка: 150 сек. Покупается поштучно.</p>
+    <p style="margin-top:.75rem;font-size:.85rem;color:var(--accent)" data-i18n="diveCost">Стоимость: 1 шт = 799, пак 5 = 3 799, пак 10 = 6 999 гемов</p>
+    <p style="margin-top:.4rem;font-size:.85rem;color:var(--text-dim)" data-i18n="diveAccess">Доступ: Лиги Аматор и Про</p>
+  </div>
+
+  <!-- Ghost -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+      <span style="font-size:1.5rem">🛡</span>
+      <h3 data-i18n="ghostTitle">Неуязвимость (Ghost) 🛡</h3>
+    </div>
+    <p data-i18n="ghostDesc">Червяк становится бледно-прозрачным. Не может умереть от столкновений, не может убить. Длительность: 5 сек. Перезарядка: 180 сек.</p>
+    <p style="margin-top:.75rem;font-size:.85rem;color:var(--accent)" data-i18n="ghostCost">Стоимость: 1 шт = 1 799, пак 5 = 7 999, пак 10 = 15 599 гемов</p>
+    <p style="margin-top:.4rem;font-size:.85rem;color:var(--text-dim)" data-i18n="ghostAccess">Доступ: ТОЛЬКО лига Про</p>
+  </div>
+
+  <!-- Exit -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+      <span style="font-size:1.5rem">🚪</span>
+      <h3 data-i18n="exitPowerTitle">Exit — выход из игры</h3>
+    </div>
+    <p data-i18n="exitPowerDesc">Прокачка уменьшает длительность выхода.</p>
+    <div class="upgrade-path" style="margin-top:.75rem">
+      <span class="step">2.50s</span><span class="arrow">→</span>
+      <span class="step">2.25s</span><span class="arrow">→</span>
+      <span class="step">2.00s</span><span class="arrow">→</span>
+      <span class="step">1.75s</span><span class="arrow">→</span>
+      <span class="step">1.50s</span>
+    </div>
+    <p style="margin-top:.75rem;font-size:.85rem;color:var(--accent)" data-i18n="exitCost">Стоимость: 1 199 → 1 599 → 1 999 → 2 399 гемов</p>
+  </div>
+
+  <!-- League Restrictions -->
+  <h3 style="color:var(--text-heading);margin:2rem 0 1rem" data-i18n="leagueRestTitle">Ограничения по лигам</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Powers / Amplifiers</th>
+          <th data-i18n="lgRookie">Новичок</th>
+          <th data-i18n="lgBasic">Базовая</th>
+          <th data-i18n="lgAmateur">Аматор</th>
+          <th data-i18n="lgPro">Про</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Turbo ⚡</td>
+          <td>✅ <span style="font-size:.75rem;color:var(--text-dim)">(base)</span></td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>Dive 🕳</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>Ghost 🛡</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 5. PROGRESSION ============ -->
+<div class="divider"></div>
+<section id="progression" class="section fade-up">
+  <span class="section-label" data-i18n="sec5Label">Раздел 5</span>
+  <h2 data-i18n="sec5Title">Прогрессия и магазин</h2>
+  <p data-i18n="sec5Desc">Игровая валюта — Гемы. Обменный курс: 680 гемов = $1. Полная прокачка (FULL) ≈ 68 000 гемов ≈ $100.</p>
+
+  <!-- Gem rates -->
+  <h3 style="color:var(--text-heading);margin-bottom:1rem" data-i18n="gemRateTitle">Курс гемов</h3>
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="num">680</div>
+      <div class="label">= $1</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">6,800</div>
+      <div class="label">= $10</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">68,000</div>
+      <div class="label">= $100 (FULL)</div>
+    </div>
+  </div>
+
+  <!-- Gems earning -->
+  <h3 style="color:var(--text-heading);margin:2rem 0 1rem" data-i18n="gemsEarnTitle">Способы получения гемов</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="thAction">Действие</th>
+          <th data-i18n="lgRookie">Новичок</th>
+          <th data-i18n="lgBasic">Базовая</th>
+          <th data-i18n="lgAmateur">Аматор</th>
+          <th data-i18n="lgPro">Про</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="gemKill">За убийство игрока</td>
+          <td>1</td><td>5</td><td>10</td><td>20</td>
+        </tr>
+        <tr>
+          <td data-i18n="gemSurv1">За выживание каждую минуту</td>
+          <td>1</td><td>5</td><td>10</td><td>20</td>
+        </tr>
+        <tr>
+          <td data-i18n="gemSurv3">Выживание 3 минуты</td>
+          <td>5</td><td>25</td><td>50</td><td>100</td>
+        </tr>
+        <tr>
+          <td data-i18n="gemSurv5">Выживание 5 минут</td>
+          <td>10</td><td>50</td><td>100</td><td>200</td>
+        </tr>
+        <tr>
+          <td data-i18n="gemSurv15">Выживание 15 минут</td>
+          <td>30</td><td>150</td><td>300</td><td>600</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- League economy -->
+  <h3 style="color:var(--text-heading);margin:2rem 0 1rem" data-i18n="econTitle">Экономика лиг</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="thLeague">Лига</th>
+          <th data-i18n="thGemsH">Гемов/час</th>
+          <th data-i18n="thValueH">Ценность/час</th>
+          <th data-i18n="thCommMinH">Комса/час (мин)</th>
+          <th data-i18n="thCommMaxH">Комса/час (макс)</th>
+          <th data-i18n="thHoursFull">Часы до FULL</th>
+          <th data-i18n="thTotalComm">Всего комсы до FULL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="league-badge rookie" data-i18n="lgRookie">Новичок</span></td>
+          <td>170</td><td>$0.25</td><td>$0.26</td><td>$0.50</td><td>~400</td><td>~$100</td>
+        </tr>
+        <tr>
+          <td><span class="league-badge basic" data-i18n="lgBasic">Базовая</span></td>
+          <td>850</td><td>$1.25</td><td>$2.60</td><td>$5.00</td><td>~80</td><td>~$200</td>
+        </tr>
+        <tr>
+          <td><span class="league-badge amateur" data-i18n="lgAmateur">Аматор</span></td>
+          <td>1,700</td><td>$2.50</td><td>$13.00</td><td>$25.00</td><td>~40</td><td>~$500</td>
+        </tr>
+        <tr>
+          <td><span class="league-badge pro" data-i18n="lgPro">Про</span></td>
+          <td>3,400</td><td>$5.00</td><td>$26.00</td><td>$50.00</td><td>~28*</td><td>~$700</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Shop -->
+  <h3 style="color:var(--text-heading);margin:2rem 0 1rem" data-i18n="shopTitle">Структура магазина</h3>
+  <div class="card-grid cols-3">
+    <div class="card">
+      <div class="card-icon">🧪</div>
+      <h3>Amplifiers</h3>
+      <p data-i18n="shopTab1">Вкладка 1: Amplifiers — Mass Orbs, Vision Boost (постоянные улучшения)</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Powers</h3>
+      <p data-i18n="shopTab2">Вкладка 2: Powers — Ghost, Dive, Turbo (время действия, перезарядка)</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚪</div>
+      <h3>Exit</h3>
+      <p data-i18n="shopTab3">Вкладка 3: Exit — прокачка за гемы</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. REFERRAL ============ -->
+<div class="divider"></div>
+<section id="referral" class="section fade-up">
+  <span class="section-label" data-i18n="sec6Label">Раздел 6</span>
+  <h2 data-i18n="sec6Title">Реферальная программа</h2>
+  <p data-i18n="sec6Desc">Реферальная программа — возможность для игроков зарабатывать дополнительную криптовалюту, приглашая новых пользователей. Каждый игрок получает уникальную реферальную ссылку.</p>
+
+  <div class="card-grid cols-2">
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <h3 style="margin-bottom:1rem">How it works</h3>
+      <ul class="feature-list">
+        <li data-i18n="refHow1">Вы делитесь своей реферальной ссылкой</li>
+        <li data-i18n="refHow2">Новый игрок регистрируется по вашей ссылке</li>
+        <li data-i18n="refHow3">Вы получаете процент от каждой игры вашего реферала</li>
+        <li data-i18n="refHow4">Полностью пассивный доход</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3 data-i18n="refBaseTitle">Базовые условия</h3>
+      <p data-i18n="refBaseDesc">Когда ваш реферал умирает или выходит через Safe Exit с балансом $X, вы автоматически получаете 2% от его баланса.</p>
+      <div class="stat-row" style="margin-top:1rem">
+        <div class="stat-box">
+          <div class="num">2%</div>
+          <div class="label">Base referral</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambassador -->
+  <div class="card" style="margin-top:1.5rem">
+    <div class="card-icon">🏅</div>
+    <h3 data-i18n="ambTitle">Программа амбассадоров</h3>
+    <p data-i18n="ambDesc">Для активных создателей контента, стримеров и инфлюенсеров доступна расширенная амбассадорская программа.</p>
+
+    <div class="stat-row" style="margin-top:1rem">
+      <div class="stat-box">
+        <div class="num">4%</div>
+        <div class="label" data-i18n="ambBase">Базовый амбассадор</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">6%</div>
+        <div class="label" data-i18n="ambPrem">Премиум амбассадор</div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:1rem">
+      <span data-i18n="ambNote">Статус определяется ежедневным топом. 30% лучших рефереров получают статус премиум. Обновление каждый день в 00:00 UTC.</span>
+    </div>
+
+    <h4 style="color:var(--text-heading);margin:1.25rem 0 .5rem" data-i18n="ambPerks">Преимущества амбассадоров:</h4>
+    <ul class="feature-list">
+      <li data-i18n="ambPerk1">Эксклюзивный Телеграм-чат с владельцами и разработчиками</li>
+      <li data-i18n="ambPerk2">Ранний доступ к новым функциям</li>
+      <li data-i18n="ambPerk3">Участие в закрытых турнирах с увеличенным призовым фондом</li>
+      <li data-i18n="ambPerk4">Возможность влиять на развитие игры</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 7. MODES ============ -->
+<div class="divider"></div>
+<section id="modes" class="section fade-up">
+  <span class="section-label" data-i18n="sec7Label">Раздел 7</span>
+  <h2 data-i18n="sec7Title">Игровые режимы</h2>
+  <p data-i18n="sec7Desc">Два основных режима на первой фазе, NFT-система и турниры — на второй.</p>
+
+  <!-- Phase 1 modes -->
+  <div class="card-grid cols-2">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+        <div class="card-icon" style="margin-bottom:0">⚔️</div>
+        <h3 data-i18n="battleTitle">Battle Arena</h3>
+        <span class="phase-tag p1" data-i18n="battlePhase">Фаза 1</span>
+      </div>
+      <p data-i18n="battleDesc">Базовый режим с Powers и Amplifiers. Размер карты подстраивается под количество игроков.</p>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+        <div class="card-icon" style="margin-bottom:0">👑</div>
+        <h3 data-i18n="brTitle">Королевская битва</h3>
+        <span class="phase-tag p1" data-i18n="brPhase">Фаза 1</span>
+      </div>
+      <p data-i18n="brDesc">На сервер одновременно заходит X игроков, последние 1–3 выживших забирают весь куш. Карта постепенно сужается.</p>
+    </div>
+  </div>
+
+  <!-- Phase 2 — NFT -->
+  <div class="card" style="margin-top:1.5rem">
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+      <div class="card-icon" style="margin-bottom:0">🎨</div>
+      <h3 data-i18n="nftTitle">NFT Система</h3>
+      <span class="phase-tag p2" data-i18n="nftPhase">Фаза 2</span>
+    </div>
+    <p data-i18n="nftDesc">NFT-атрибуты выпускаются коллекцией в формате Blind-Boxes. Из 4 атрибутов можно скрафтить уникальный NFT-скин.</p>
+    <div class="card-grid cols-2" style="margin-top:1rem">
+      <div>
+        <ul class="feature-list">
+          <li data-i18n="nftAttr1">Моделька (цвет, текстура)</li>
+          <li data-i18n="nftAttr2">Глаза</li>
+          <li data-i18n="nftAttr3">Шапка, головной убор</li>
+          <li data-i18n="nftAttr4">Хвост</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tournaments -->
+  <div class="card" style="margin-top:1.5rem">
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+      <div class="card-icon" style="margin-bottom:0">🏆</div>
+      <h3 data-i18n="tournTitle">Турниры</h3>
+      <span class="phase-tag p2" data-i18n="tournPhase">Фаза 2</span>
+    </div>
+    <p data-i18n="tournDesc">Все игроки стартуют с одинаковыми характеристиками: 100 очков массы, Turbo (макс. прокачка), 1 Dive и 1 Ghost. На карте не спавнятся пузыри.</p>
+
+    <div class="formula" data-i18n="tournFormula">Очки раунда = (Убийства × 50) + (Масса перед смертью)</div>
+
+    <!-- Tournament bracket -->
+    <h4 style="color:var(--text-heading);margin:1.5rem 0 1rem" data-i18n="bracketTitle">Турнирная сетка (1000 игроков)</h4>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4 data-i18n="stage1Title">ЭТАП 1: 1000 → 250 игроков</h4>
+        <p data-i18n="stage1Desc">3 раунда, 40 параллельных лобби по 25 игроков. Топ-6 + 10 wildcard.</p>
+      </div>
+      <div class="timeline-item">
+        <h4 data-i18n="stage2Title">ЭТАП 2: 250 → 60 игроков</h4>
+        <p data-i18n="stage2Desc">3 раунда, 10 лобби по 25 игроков. Топ-5 + 10 wildcard.</p>
+      </div>
+      <div class="timeline-item">
+        <h4 data-i18n="stage3Title">ЭТАП 3: Полуфинал — 60 → 15</h4>
+        <p data-i18n="stage3Desc">3 раунда, 4 лобби по 15 игроков. Топ-3 + 3 wildcard.</p>
+      </div>
+      <div class="timeline-item">
+        <h4 data-i18n="stage4Title">ЭТАП 4: ФИНАЛ — 15 игроков</h4>
+        <p data-i18n="stage4Desc">3 решающих раунда, 15 игроков в одном лобби. Победитель — наибольшая сумма очков.</p>
+      </div>
+    </div>
+
+    <!-- Prize pool -->
+    <h4 style="color:var(--text-heading);margin:1.5rem 0 1rem" data-i18n="prizeTitle">Призовой фонд (пример: $9,820)</h4>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Prize</th>
+            <th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>🥇 1st</td><td>$3,000</td><td>30.55%</td></tr>
+          <tr><td>🥈 2nd</td><td>$2,000</td><td>20.37%</td></tr>
+          <tr><td>🥉 3rd</td><td>$1,500</td><td>15.27%</td></tr>
+          <tr><td>4th</td><td>$900</td><td>9.16%</td></tr>
+          <tr><td>5th</td><td>$600</td><td>6.11%</td></tr>
+          <tr><td>6th</td><td>$400</td><td>4.07%</td></tr>
+          <tr><td>7th</td><td>$300</td><td>3.05%</td></tr>
+          <tr><td>8th</td><td>$250</td><td>2.55%</td></tr>
+          <tr><td>9th</td><td>$210</td><td>2.14%</td></tr>
+          <tr><td>10th</td><td>$180</td><td>1.83%</td></tr>
+          <tr><td>11th</td><td>$150</td><td>1.53%</td></tr>
+          <tr><td>12th</td><td>$120</td><td>1.22%</td></tr>
+          <tr><td>13th</td><td>$90</td><td>0.92%</td></tr>
+          <tr><td>14th</td><td>$70</td><td>0.71%</td></tr>
+          <tr><td>15th</td><td>$50</td><td>0.51%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. SECURITY ============ -->
+<div class="divider"></div>
+<section id="security" class="section fade-up">
+  <span class="section-label" data-i18n="sec8Label">Раздел 8</span>
+  <h2 data-i18n="sec8Title">Антикриминальные меры</h2>
+  <p data-i18n="sec8Desc">Комплексная система защиты от ботов, сговора и отмывания денег.</p>
+
+  <div class="card-grid cols-3">
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h3 data-i18n="antiBotTitle">Защита от ботов</h3>
+      <ul class="feature-list">
+        <li data-i18n="antiBot1">CAPTCHA при входе</li>
+        <li data-i18n="antiBot2">Детекция нечеловеческих паттернов движения</li>
+        <li data-i18n="antiBot3">Система репортов</li>
+        <li data-i18n="antiBot4">IP ограничения</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3 data-i18n="antiColTitle">Защита от сговора</h3>
+      <ul class="feature-list">
+        <li data-i18n="antiCol1">Рандомизация спавна, нельзя играть с друзьями</li>
+        <li data-i18n="antiCol2">Подача жалоб и последующий бан в случае подтверждения</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏦</div>
+      <h3 data-i18n="antiAmlTitle">Предотвращение отмывания денег</h3>
+      <ul class="feature-list">
+        <li data-i18n="antiAml1">Лимиты на вывод средств</li>
+        <li data-i18n="antiAml2">Мониторинг подозрительных транзакций</li>
+        <li data-i18n="antiAml3">KYC для вывода больших сумм</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. MONETIZATION ============ -->
+<div class="divider"></div>
+<section id="monetization" class="section fade-up">
+  <span class="section-label" data-i18n="sec9Label">Раздел 9</span>
+  <h2 data-i18n="sec9Title">Монетизация платформы</h2>
+  <p data-i18n="sec9Desc">Многоканальная система получения дохода платформой.</p>
+
+  <div class="card-grid cols-2">
+    <div class="card">
+      <div class="card-icon">💵</div>
+      <h3>Revenue Streams</h3>
+      <ul class="feature-list">
+        <li data-i18n="rev1">Комиссия при смерти и Safe Exit: 6,5–12,5% от баланса</li>
+        <li data-i18n="rev3">Продажа бустов и гемов за криптовалюту</li>
+        <li data-i18n="rev4">NFT-коллекции + Роялти: 2,5% от продаж на маркетплейсе</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">♻️</div>
+      <h3 data-i18n="reinvestTitle">Реинвестирование</h3>
+      <p data-i18n="reinvestDesc">Турниры, NFT-коллекции, Регулярные обновления</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-logo">🐍 <span>Snake Battle</span></div>
+  <p data-i18n="footerText">© 2025 Web3 Snake Battle. Все права защищены. Game Design Document</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
