@@ -7,6 +7,7 @@ const translations = {
   navPowers: { ru: 'Способности', en: 'Powers' },
   navReferral: { ru: 'Реферальная', en: 'Referral' },
   navModes: { ru: 'Режимы', en: 'Modes' },
+  navPresentation: { ru: '📊 Презентация', en: '📊 Presentation' },
 
   // HERO
   heroBadge: { ru: 'Game Design Document', en: 'Game Design Document' },
